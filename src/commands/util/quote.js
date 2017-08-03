@@ -18,7 +18,8 @@ module.exports = class FirstCommand extends Commando.Command {
 				{
 					key: 'member',
 					label: 'member',
-					prompt: 'Who should I quote?',
+					prompt: '',
+					default: '',
 					type: 'member'
 				},
 				{
@@ -35,16 +36,22 @@ module.exports = class FirstCommand extends Commando.Command {
 	async run(msg, args) {
 		let {member, text} = args;
 
+		if (member === '') {
+			return msg.reply('You forgot to tell me who to quote!');
+		}
+
 		if (text === '') {
 			return msg.reply('You forgot to tell me what to say!');
 		}
 
-		msg.channel.sendEmbed({
-			color: member.displayColor,
-			description: text,
-			author: {
-				name: member.nickname ? (`${member.nickname} (@${member.user.tag})`) : member.user.tag,
-				icon_url: member.user.avatarURL
+		msg.channel.send('', {
+			embed: {
+				color: member.displayColor,
+				description: text,
+				author: {
+					name: member.nickname ? (`${member.nickname} (@${member.user.tag})`) : member.user.tag,
+					icon_url: member.user.displayAvatarURL()
+				}
 			}
 		});
 	}

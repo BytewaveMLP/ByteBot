@@ -18,7 +18,8 @@ module.exports = class FirstCommand extends Commando.Command {
 				{
 					key: 'member',
 					label: 'member',
-					prompt: 'Who should I fetch the user info for?',
+					prompt: '',
+					default: '',
 					type: 'member'
 				}
 			]
@@ -28,10 +29,12 @@ module.exports = class FirstCommand extends Commando.Command {
 	async run(msg, args) {
 		let {member} = args;
 
+		if (member === '') member = msg.guild.me;
+
 		let embed = {
 			color: member.displayColor,
 			thumbnail: {
-				url: member.user.avatarURL
+				url: member.user.displayAvatarURL()
 			},
 			title: member.nickname ? (`${member.nickname} (@${member.user.tag})`) : member.user.tag,
 			fields: [
@@ -54,21 +57,41 @@ module.exports = class FirstCommand extends Commando.Command {
 			]
 		};
 
-		if (member.user.bot) return msg.channel.sendEmbed(embed);
+		if (member.user.bot) return msg.channel.send('', {embed: embed});
 
 		member.user.fetchProfile().then((profile) => {
+			if (member !== msg.guild.me) {
+				embed.fields.push(
+					{
+						name: 'Mutual servers',
+						value: profile.mutualGuilds.array().filter((guild) => {
+							return guild.available;
+						}).join(', ') || 'None'
+					}
+				);
+			}
 			embed.fields.push(
-				{
-					name: 'Mutual servers',
-					value: profile.mutualGuilds.array().join(', ') || 'None'
-				},
 				{
 					name: 'Has Nitro',
 					value: `${profile.premiumSince ? `Yes (since ${profile.premiumSince.toString()})` : 'No'}`
+				},
+				{
+					name: 'Nicknames',
+					value: profile.mutualGuilds.array().map((guild) => {
+						if (!guild.available) return false;
+
+						const guildMember = guild.members.get(member.id);
+
+						if (guildMember) {
+							return guildMember.nickname;
+						}
+
+						return false;
+					}).filter((nickname) => nickname).join(', ') || 'None'
 				}
 			);
 
-			msg.channel.sendEmbed(embed);
+			msg.channel.send('', {embed: embed});
 		});
 	}
 };
