@@ -16,7 +16,6 @@ client.config = config;
 
 client.registry
 	.registerGroups([
-		// ['util', 'Utility'],
 		['admin', 'Administrative']
 	])
 	.registerDefaults()
