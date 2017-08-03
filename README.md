@@ -1,10 +1,10 @@
-# Randibooru.js
+# ByteBot
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-> A Node.js port of [Randibooru](https://github.com/BytewaveMLP/randibooru)
+> A custom-made selfbot for Discord
 
-Randibooru.js is my first experiment in Node.js. My goal is to attempt to port Randibooru, my old Python-based Discord bot, to discord.js on Node.
+ByteBot is my own personal selfbot for Discord. He contains my own memes, custom commands, and other useful tools and utilities.
 
 ## Table of Contents
 
@@ -29,15 +29,16 @@ Randibooru.js is my first experiment in Node.js. My goal is to attempt to port R
 $ npm install # Install all dependencies
 $ cp config.example.json config.json # Create a local config
 $ $EDITOR config.json # Add your config options here
-### NOTE: We assume your derpiAPIKey points to an account with the Everything filter set. If not, the bot will still work, but replies may be incorrect in terms of the amount of images matching a given query.
-$ node ./src/randibooru.js # Run the bot
+$ node ./src/bytebot.js # Run the bot (you can also use ./start.sh/start.bat)
 ```
 
 ## Usage
 
 ### Commands list
 
-- `rb!random [query]` - Get a random image from Derpibooru, optionally matching the given query.
+- `-bbuserinfo user` - Shows random information about a given user
+
+- `-bbquote user text` - Creates a small embed that looks like a quote from another user
 
 (This also includes the list of built-in Discord.js commands, the likes of which I'm too lazy to list.)
 
