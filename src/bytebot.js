@@ -28,7 +28,7 @@ client.setProvider(
 client
 	.on('error', console.error)
 	.on('warn', console.warn)
-	.on('debug', console.log)
+	.on('debug', console.debug)
 	.on('ready', () => {
 		console.log(`Initialized - logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
 	})
@@ -42,7 +42,7 @@ client
 	})
 	.on('message', (msg) => {
 		if (msg.author.id === "194178931442581504" && Math.random() > 0.9) {
-			console.log('Say cheese!');
+			console.debug('Say cheese!');
 			msg.react('🧀');
 		}
 	})
