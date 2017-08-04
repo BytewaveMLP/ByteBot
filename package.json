@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@types/node": "^8.0.19",
+    "discord.js": "11.1.0",
+    "uws": "0.14.1"
+  },
+  "name": "ByteBot-TypeScript",
+  "version": "0.1.0",
+  "description": "A Discord selfbot written in Typescript",
+  "main": "out/index.js",
+  "repository": "https://github.com/BytewaveMLP/ByteBot.git",
+  "author": "Eliot Partridge <shortcircuit369@gmail.com>",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "node out/index.js",
+    "lint": "tslint ./src"
+  }
+}

@@ -1,17 +1,6 @@
-npm-debug.log*
-
 # Dependency directories
 node_modules/
 
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-build/
-
+# Custom stuff
+out/
 config.json
