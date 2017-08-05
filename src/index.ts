@@ -87,22 +87,22 @@ function splitPars(value: string): string[] {
 
 const commands = {
 	shrug: (message: Discord.Message, parString: string) => {
-		const r = message.edit(parString + " ¯\\_(ツ)_/¯");
+		message.edit(parString + " ¯\\_(ツ)_/¯");
 	},
 
 	table: (message: Discord.Message, parString: string) => {
-		const r = message.edit(parString + " (╯°□°）╯︵ ┻━┻");
+		message.edit(parString + " (╯°□°）╯︵ ┻━┻");
 	},
 	tableflip: (a, b) => commands.table(a, b),
 
 	unflip: (message: Discord.Message, parString: string) => {
-		const r = message.edit(parString + " ┬─┬ ノ( ゜-゜ノ)");
+		message.edit(parString + " ┬─┬ ノ( ゜-゜ノ)");
 	},
 	untable: (a, b) => commands.unflip(a, b),
 
 	playing: (message: Discord.Message, parString: string) => {
-		const r = bot.user.setGame(parString);
-		const a = message.delete();
+		bot.user.setGame(parString);
+		message.delete();
 	},
 
 	info: (message: Discord.Message, parString: string) => {
@@ -134,7 +134,9 @@ const commands = {
 					},
 					{
 						name: 'Roles',
-						value: member.roles.array().splice(1).join(', ') || 'None'
+						value: member.roles.array().splice(1).map((role: Discord.Role) => {
+							return role.name;
+						}).join(', ') || 'None'
 					}
 				]
 			};
@@ -146,9 +148,10 @@ const commands = {
 					embed.fields.push(
 						{
 							name: 'Mutual servers',
-							value: profile.mutualGuilds.array().filter((guild) => {
-								return guild.available;
-							}).join(', ') || 'None'
+							value: profile.mutualGuilds.array().filter((guild: Discord.Guild) => guild.available).map((guild: Discord.Guild) => {
+								const nickname = guild.members.get(member.id).nickname;
+								return `- ${guild.name}${nickname ? ` (${nickname})` : ''}`;
+							}).join('\n') || 'None'
 						}
 					);
 				}
@@ -156,20 +159,6 @@ const commands = {
 					{
 						name: 'Has Nitro',
 						value: `${profile.premiumSince ? `Yes (since ${profile.premiumSince.toString()})` : 'No'}`
-					},
-					{
-						name: 'Nicknames',
-						value: profile.mutualGuilds.array().map((guild) => {
-							if (!guild.available) return false;
-
-							const guildMember = guild.members.get(member.id);
-
-							if (guildMember) {
-								return guildMember.nickname;
-							}
-
-							return false;
-						}).filter((nickname) => nickname).join(', ') || 'None'
 					}
 				);
 
@@ -211,7 +200,7 @@ const events = {
 	emojiUpdate: (emoji: Discord.Emoji) => {
 		//
 	},
-	error: (error) => {
+	error: (error)	 => {
 		logPrefixed(`ERROR:`, error);
 	},
 	guildBanAdd: (guild: Discord.Guild, user: Discord.User) => {
