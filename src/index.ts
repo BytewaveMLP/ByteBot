@@ -261,7 +261,7 @@ const events = {
 		if (!message.author.bot && Date.now() - (message.createdTimestamp + timediff) < 5000) {
 			logPrefixed(`Quick Message Delete Detected!`);
 			console.log(`|-------------------------------`);
-			console.log(`| Server: ${entityToStr(message.guild)}`);
+			if (message.guild) { console.log(`| Server: ${entityToStr(message.guild)}`); }
 			console.log(`| Channel: ${entityToStr(message.channel)}`);
 			console.log(`| Author: ${entityToStr(message.author)}`);
 			console.log(`| Created At: ${message.createdAt}`);
