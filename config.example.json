@@ -1,0 +1,12 @@
+{
+	"auth": {
+		"discordToken": ""
+	},
+	"bot": {
+		"prefix": "-bb",
+		"cheese": {
+			"id": "",
+			"chance": 10
+		}
+	}
+}
