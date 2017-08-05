@@ -150,7 +150,7 @@ const commands = {
 							name: 'Mutual servers',
 							value: profile.mutualGuilds.array().filter((guild: Discord.Guild) => guild.available).map((guild: Discord.Guild) => {
 								const nickname = guild.members.get(member.id).nickname;
-								return `- ${guild.name}${nickname ? ` (${nickname})` : ''}`;
+								return `• ${guild.name}${nickname ? ` (${nickname})` : ''}`;
 							}).join('\n') || 'None'
 						}
 					);
