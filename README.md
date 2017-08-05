@@ -22,25 +22,23 @@ ByteBot is my own personal selfbot for Discord. He contains my own memes, custom
 ### Prerequisites
 
 - Node.js (tested on v8.2.1)
+- A TypeScript compiler
 
 ### Installation
 
 ```bash
-$ npm install # Install all dependencies
+$ yarn install # Install all dependencies (you can use npm too, but why would you??)
+$ tsc # Compile the TypeScript code from src/ to JS
 $ cp config.example.json config.json # Create a local config
 $ $EDITOR config.json # Add your config options here
-$ node ./src/bytebot.js # Run the bot (you can also use ./start.sh/start.bat)
+$ node ./out/index.js # Run the bot
 ```
 
 ## Usage
 
 ### Commands list
 
-- `-bbuserinfo user` - Shows random information about a given user
-
-- `-bbquote user text` - Creates a small embed that looks like a quote from another user
-
-(This also includes the list of built-in Discord.js commands, the likes of which I'm too lazy to list.)
+- `-bbinfo user` - Shows random information about a given user
 
 ## Maintainers
 
