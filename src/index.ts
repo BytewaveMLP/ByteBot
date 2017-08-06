@@ -296,7 +296,31 @@ const events = {
 	},
 	messageUpdate: (oldMessage: Discord.Message, newMessage: Discord.Message) => {
 		if (oldMessage.content !== newMessage.content) {
-			
+			if (!newMessage.author.bot && Date.now() - (newMessage.createdTimestamp + timediff) < 5000) {
+				logPrefixed(`Quick Message Edit Detected!`);
+				console.log(`|-------------------------------`);
+				if (newMessage.guild) { console.log(`| Server: ${entityToStr(newMessage.guild)}`); }
+				console.log(`| Channel: ${entityToStr(newMessage.channel)}`);
+				console.log(`| Author: ${entityToStr(newMessage.author)}`);
+				console.log(`| Created At: ${newMessage.createdAt}`);
+				console.log(`| Edited At: ${newMessage.editedAt}`);
+				console.log(`|---------- Content: ----------`);
+				console.log(`| ORIGINAL:`);
+				console.log(`| ${oldMessage.content.replace("\n", "\n| ")}`);
+				console.log(`|`);
+				console.log(`| NEW:`);
+				console.log(`| ${newMessage.content.replace("\n", "\n| ")}`);
+
+				const attachments = newMessage.attachments.array();
+				if (attachments.length > 0) {
+					console.log(`|---------Attachments: --------`);
+					attachments.forEach((attachment: Discord.MessageAttachment) => {
+						console.log(`| ${attachment.url}`);
+					});
+				}
+
+				console.log(`|-------------------------------`);
+			}
 		}
 	},
 	presenceUpdate: (oldMember: Discord.GuildMember, newMember: Discord.GuildMember) => {
