@@ -7,6 +7,7 @@
 		],
 		"noImplicitAny": false,
 		"sourceMap": false,
+		"removeComments": true,
 		"outDir": "out"
 	},
 	"include": [
