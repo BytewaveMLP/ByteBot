@@ -3,9 +3,9 @@
 
 import * as Discord from "discord.js";
 
+require('./util/string');
 
 const bot = new Discord.Client();
-
 const config = require("../config.json");
 
 /**
