@@ -267,7 +267,7 @@ const events = {
 			console.log(`| Created At: ${message.createdAt}`);
 			if (message.editedAt) { console.log(`| Last Modified: ${message.editedAt}`); }
 			console.log(`|---------- Content: ----------`);
-			console.log(`| ${message.content.replace("\n", "\n| ")}`);
+			console.log(`| ${message.content.replaceAll("\n", "\n| ")}`);
 
 			const attachments = message.attachments.array();
 			if (attachments.length > 0) {
@@ -306,10 +306,10 @@ const events = {
 				console.log(`| Edited At: ${newMessage.editedAt}`);
 				console.log(`|---------- Content: ----------`);
 				console.log(`| ORIGINAL:`);
-				console.log(`| ${oldMessage.content.replace("\n", "\n| ")}`);
+				console.log(`| ${oldMessage.content.replaceAll("\n", "\n| ")}`);
 				console.log(`|`);
 				console.log(`| NEW:`);
-				console.log(`| ${newMessage.content.replace("\n", "\n| ")}`);
+				console.log(`| ${newMessage.content.replaceAll("\n", "\n| ")}`);
 
 				const attachments = newMessage.attachments.array();
 				if (attachments.length > 0) {
